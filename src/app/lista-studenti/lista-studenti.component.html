@@ -1,0 +1,24 @@
+
+<div class="input">
+    <nb-form-field>
+        <input type="text" nbInput fieldSize="giant" placeholder="Inserisci un nome" [(ngModel)]="student" (keydown.enter)="addStudent()">
+        <button nbButton hero size="giant" status="primary" (click)="drawStudent()">
+            Estrai  
+        </button>
+    </nb-form-field>
+</div>
+
+
+<nb-card>
+    <nb-card-header>
+        Studenti da estrarre:
+    </nb-card-header>
+    <nb-list listenWindowScroll >
+        <nb-list-item *ngFor="let student of students">
+            <button nbButton ghost shape="round" size="small" status="danger" (click)="removeStudent(student)">
+                <nb-icon icon="minus"></nb-icon>
+            </button>
+            {{student | titlecase}}
+        </nb-list-item>
+    </nb-list>
+</nb-card>
