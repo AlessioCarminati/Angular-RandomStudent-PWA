@@ -1,22 +1,25 @@
+<!-- Title -->
+<h1>{{title}}</h1>
 
+<!-- Input studenti -->
 <div class="input">
     <nb-form-field>
         <input type="text" nbInput fieldSize="giant" placeholder="Inserisci un nome" [(ngModel)]="student" (keydown.enter)="addStudent()">
-        <button nbButton hero size="giant" status="primary" (click)="drawStudent()">
+        <button [disabled]="studentList.length === 0" nbButton size="giant" status="primary" (click)="drawStudent()">
             Estrai  
         </button>
     </nb-form-field>
 </div>
 
-
+<!-- Lista studenti -->
 <nb-card>
     <nb-card-header>
         Studenti da estrarre:
     </nb-card-header>
     <nb-list listenWindowScroll >
-        <nb-list-item *ngFor="let student of students">
+        <nb-list-item *ngFor="let student of studentList">
             <button nbButton ghost shape="round" size="small" status="danger" (click)="removeStudent(student)">
-                <nb-icon icon="minus"></nb-icon>
+                <nb-icon icon="close"></nb-icon>
             </button>
             {{student | titlecase}}
         </nb-list-item>
