@@ -2,21 +2,34 @@
 <h1>{{title}}</h1>
 
 <!-- Input studenti -->
-<div class="input">
+<nb-card>
+
     <nb-form-field>
-        <input type="text" nbInput fieldSize="giant" placeholder="Inserisci un nome" [(ngModel)]="student" (keydown.enter)="addStudent()">
-        <button [disabled]="studentList.length === 0" nbButton size="giant" status="primary" (click)="drawStudent()">
-            Estrai  
+        <button nbTooltip="Aggiungi studente" nbPrefix nbButton ghost nbSuffix size="giant" (click)="addStudent()">
+            <nb-icon icon="plus"></nb-icon>
+        </button>
+
+        <input type="text" nbInput #inputName fullWidth fieldSize="giant" placeholder="Inserisci un nome"
+            [status]="isValid ? 'basic' : 'danger'" [(ngModel)]="student" (keydown.enter)="addStudent()">
+
+        <button [disabled]="studentList.length === 0" nbButton nbSuffix nbTooltip="Estrai studente" fullWidth
+            size="giant" status="primary" (click)="drawStudent()">
+            <nb-icon icon="person"></nb-icon>
+
         </button>
     </nb-form-field>
-</div>
+</nb-card>
+
 
 <!-- Lista studenti -->
-<nb-card>
+<nb-card *ngIf="studentList.length > 0">
     <nb-card-header>
-        Studenti da estrarre:
+        Studenti da estrarre
+        <button nbTooltip="Cancella lista" nbButton ghost size="small" status="danger" (click)="removeStudent()">
+            <nb-icon icon="trash"></nb-icon>
+        </button>
     </nb-card-header>
-    <nb-list listenWindowScroll >
+    <nb-list>
         <nb-list-item *ngFor="let student of studentList">
             <button nbButton ghost shape="round" size="small" status="danger" (click)="removeStudent(student)">
                 <nb-icon icon="close"></nb-icon>

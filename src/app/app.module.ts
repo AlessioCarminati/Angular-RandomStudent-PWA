@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListaStudentiComponent } from './lista-studenti/lista-studenti.component';
 
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbIconModule, NbButtonModule, NbInputModule, NbFormFieldModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbIconModule, NbButtonModule, NbInputModule, NbFormFieldModule, NbTooltipModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
@@ -30,7 +30,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbButtonModule,
     NbIconModule,
     NbInputModule,
-    NbFormFieldModule
+    NbFormFieldModule,
+    NbTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

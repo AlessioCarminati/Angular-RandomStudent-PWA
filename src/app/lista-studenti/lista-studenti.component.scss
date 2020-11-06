@@ -1,6 +1,6 @@
 nb-card{
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 400px;
     min-height: 0px;
 }
 
@@ -11,9 +11,10 @@ h1{
     line-height: 100px;
 }
 
-.input{
-    text-align: center;
-    margin: 10px;
+nb-card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
