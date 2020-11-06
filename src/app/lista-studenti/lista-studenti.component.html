@@ -9,7 +9,7 @@
             <nb-icon icon="plus"></nb-icon>
         </button>
 
-        <input type="text" nbInput #inputName fullWidth fieldSize="giant" placeholder="Inserisci un nome"
+        <input type="text" nbInput #inputName fullWidth fieldSize="giant" placeholder="Inserisci un nome" maxlength="35"
             [status]="isValid ? 'basic' : 'danger'" [(ngModel)]="student" (keydown.enter)="addStudent()">
 
         <button [disabled]="studentList.length === 0" nbButton nbSuffix nbTooltip="Estrai studente" fullWidth
