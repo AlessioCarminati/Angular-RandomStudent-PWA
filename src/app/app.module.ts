@@ -1,3 +1,4 @@
+import { ThemingService } from './_services/theming.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListaStudentiComponent } from './lista-studenti/lista-studenti.component';
 
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbIconModule, NbButtonModule, NbInputModule, NbFormFieldModule, NbTooltipModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbIconModule, NbButtonModule, NbInputModule, NbFormFieldModule, NbTooltipModule, NbThemeService } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
@@ -22,7 +23,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: 'dark' }),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
@@ -33,7 +34,9 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbFormFieldModule,
     NbTooltipModule
   ],
-  providers: [],
+  providers: [
+    ThemingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
