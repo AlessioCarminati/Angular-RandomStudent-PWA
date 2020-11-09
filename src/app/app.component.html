@@ -1,5 +1,10 @@
 <nb-layout>
     <nb-layout-column>
-        <router-outlet></router-outlet>
+        <router-outlet>
+            <button nbTooltip="Cambia tema" nbButton ghost (click)="toggleTheme()">
+                <nb-icon [icon]="lightTheme ? 'moon' : 'sun'">
+                </nb-icon>
+            </button>
+        </router-outlet>
     </nb-layout-column>
 </nb-layout>

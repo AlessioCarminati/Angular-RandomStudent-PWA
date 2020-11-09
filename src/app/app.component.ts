@@ -12,10 +12,19 @@ export class AppComponent implements OnInit {
   @HostBinding('class') public cssClass: string;
 
   title = 'EstrazioneStudenti';
+  lightTheme: boolean;
 
   ngOnInit(): void {
-    this.themingService.theme.subscribe((theme: string) => {
-      this.cssClass = theme;
-    });
+    this.themingService.load();
+    if (this.themingService.currentActive() === 'default')
+      this.lightTheme = true;
+    else
+      this.lightTheme = false;
   }
+
+  toggleTheme() {
+    this.lightTheme = !this.lightTheme;
+    this.lightTheme ? this.themingService.update('default') : this.themingService.update('dark');
+  }
+
 }

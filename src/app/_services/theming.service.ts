@@ -1,30 +1,54 @@
-import { ApplicationRef, Injectable } from '@angular/core';
+import { ApplicationRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class ThemingService {
 
-    theme = new BehaviorSubject("default"); // <- initial theme
-    
-    constructor(private ref: ApplicationRef, private themeService: NbThemeService) {
-        // Initially check if dark mode is enabled on system
-        const darkModeOn =
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches;
+    private theme: string;
 
-        // If dark mode is enabled then directly switch to the dark-theme
-        if (darkModeOn) {
-            this.themeService.changeTheme('dark');
+    constructor(private themeService: NbThemeService) {}
+
+    _detectPrefersColorScheme() {
+        // Detect if prefers-color-scheme is supported
+         if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
+             // Set colorScheme to Dark if prefers-color-scheme is dark. Otherwise set to light.
+             this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+        } else {
+             // If the browser doesn't support prefers-color-scheme, set it as default to light
+            this.theme = 'default';
         }
-
-        // Watch for changes of the preference
-        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
-            const turnOn = e.matches;
-            this.themeService.changeTheme(turnOn ? "dark" : "default");
-
-            // Trigger refresh of UI
-            this.ref.tick();
-        });
     }
+
+    _setColorScheme(theme) {
+        this.theme = theme;
+        // Save prefers-color-scheme to localStorage
+        localStorage.setItem('prefers-color', theme);
+    }
+
+    _getColorScheme() {
+        // Check if any prefers-color-scheme is stored in localStorage
+        if (localStorage.getItem('prefers-color')) {
+            // Save prefers-color-scheme from localStorage
+            this.theme = localStorage.getItem('prefers-color');
+        } else {
+            // If no prefers-color-scheme is stored in localStorage, try to detect OS default prefers-color-scheme
+            this._detectPrefersColorScheme();
+        }
+    }
+
+    load() {
+        this._getColorScheme();
+        this.themeService.changeTheme(this.theme);
+    }
+
+    update(theme) {
+        this._setColorScheme(theme);
+        this.themeService.changeTheme(theme);
+    }
+
+    currentActive() {
+        return this.theme;
+    }
+
 }
