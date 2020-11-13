@@ -11,6 +11,8 @@ import { ListaStudentiComponent } from './lista-studenti/lista-studenti.componen
 
 import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbIconModule, NbButtonModule, NbInputModule, NbFormFieldModule, NbTooltipModule, NbThemeService } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbIconModule,
     NbInputModule,
     NbFormFieldModule,
-    NbTooltipModule
+    NbTooltipModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     ThemingService

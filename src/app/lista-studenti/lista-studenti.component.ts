@@ -14,7 +14,7 @@ export class ListaStudentiComponent implements OnInit, AfterViewInit {
   public studentList: string[] = [];
 
   public title: string;
-  private titleList: string[] = ['Buongiorno', 'Chi sarà il fortunato?', "Pronti per l'interrogazione?"];
+  private titleList: string[] = ['Buongiorno', 'Chi sarà il fortunato?', "Buona interrogazione!"];
   private drawTitleList: string[] = ['Oggi tocca a #', 'Forza #!', 'Il fortunato è #'];
 
   public isValid: boolean = true;
