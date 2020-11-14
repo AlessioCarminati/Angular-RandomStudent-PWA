@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private themingService: ThemingService) { }
   @HostBinding('class') public cssClass: string;
 
-  title = 'EstrazioneStudenti';
+  title = 'Random student';
   lightTheme: boolean;
 
   ngOnInit(): void {

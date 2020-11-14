@@ -40,18 +40,23 @@ export class ListaStudentiComponent implements OnInit, AfterViewInit {
     });
   }
 
+  //il nome è valido se non è presente nella lista, se non è fatto solo di spazi e se l'input è vuoto
   checkStudent(s: string): boolean {
-    this.isValid = !this.studentList.includes(s);
+    if(!this.studentList.includes(this.toTitleCase(s).trim()) && (s.trim().length > 0 || s.length == 0))
+      this.isValid = true;
+    else 
+      this.isValid = false;
     return this.isValid
   }
 
   addStudent(): void {
     if (this.student && this.checkStudent(this.student)) {
-      this.studentList.push(this.student);
+      this.studentList.push(this.toTitleCase(this.student.trim()));
       this.student = null;
     }
   }
 
+  //estrae lo studente, genera il titolo con il suo nome e lo rimuove dalla lista
   drawStudent() {
     let randStudent = this.randomString(this.studentList);
     let randTitle = this.randomString(this.drawTitleList);
@@ -59,6 +64,7 @@ export class ListaStudentiComponent implements OnInit, AfterViewInit {
     this.removeStudent(randStudent);
   }
 
+  //rimuove lo studente selezionato o tutti gli studenti in base al parametro
   removeStudent(s?: string): void {
     s ? this.studentList = this.studentList.filter(item => item !== s) : this.studentList = []
   }
@@ -68,8 +74,19 @@ export class ListaStudentiComponent implements OnInit, AfterViewInit {
     return array[Math.floor(Math.random() * array.length)];
   }
 
+  //Converte la stringa in title case
+  toTitleCase(str: string) {
+    str.trim();
+    return str.replace(
+      /\w\S*/g,
+      function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+    );
+  }
+
   //Salva i dati prima che la pagina venga chiusa o refreshata
-  @HostListener('window:beforeunload') updateStorage() {
+  @HostListener('document:visibilitychange') updateStorage() {
     localStorage.setItem('students', JSON.stringify(this.studentList));
   }
 

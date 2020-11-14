@@ -1,7 +1,7 @@
 <nb-layout>
     <nb-layout-column>
         <router-outlet>
-            <button nbTooltip="Cambia tema" nbButton ghost (click)="toggleTheme()">
+            <button nbTooltip="Cambia tema" nbTooltipPlacement="left" nbButton ghost (click)="toggleTheme()">
                 <nb-icon [icon]="lightTheme ? 'moon' : 'sun'">
                 </nb-icon>
             </button>
