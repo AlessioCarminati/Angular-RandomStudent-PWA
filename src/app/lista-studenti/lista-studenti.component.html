@@ -12,12 +12,11 @@
         <input type="text" nbInput #inputName fullWidth fieldSize="giant" placeholder="Inserisci un nome" maxlength="35"
             [status]="isValid ? 'basic' : 'danger'" [(ngModel)]="student" (keydown.enter)="addStudent()">
 
-        <button [disabled]="studentList.length === 0" nbButton nbSuffix nbTooltip="Estrai studente" fullWidth
-            size="giant" status="primary" (click)="drawStudent()">
-            <nb-icon icon="person"></nb-icon>
-
+        <button [disabled]="studentList.length === 0" nbButton nbSuffix fullWidth size="giant" status="primary" (click)="drawStudent()">
+            <nb-icon icon="shuffle"></nb-icon>
         </button>
     </nb-form-field>
+
 </nb-card>
 
 
@@ -34,7 +33,7 @@
             <button nbButton ghost shape="round" size="small" status="danger" (click)="removeStudent(student)">
                 <nb-icon icon="close"></nb-icon>
             </button>
-            {{student | titlecase}}
+            {{student }}
         </nb-list-item>
     </nb-list>
 </nb-card>
